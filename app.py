@@ -24,6 +24,7 @@ DB_CONFIG = dict(
     user=os.environ.get("DB_USER", "root"),
     password=os.environ.get("DB_PASSWORD", "123456"),
     database=os.environ.get("DB_NAME", "attendance_db"),
+    port=int(os.environ.get("DB_PORT", 3306)),
 )
 
 
@@ -229,4 +230,6 @@ def export_report():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    debug = os.environ.get("FLASK_DEBUG", "True").lower() in ("true", "1")
+    app.run(host="0.0.0.0", port=port, debug=debug)
